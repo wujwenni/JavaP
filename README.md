@@ -1,2 +1,2 @@
 # JavaP
-aa
+only .java
