@@ -13,6 +13,7 @@ public class PlantSelectionScreen extends BaseScreen {
 
     public PlantSelectionScreen(UIManager uiManager) {
         super(uiManager);
+        setBackgroundImage("backgrounds/login_backgroundimage.png");
         initialize();
     }
 

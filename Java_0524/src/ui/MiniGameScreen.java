@@ -1,0 +1,67 @@
+package ui;
+
+import ui.component.ButtonBuilder;
+import ui.component.LabelBuilder;
+import ui.minigames.ColorGameLauncher;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class MiniGameScreen extends BaseScreen {
+
+    private volatile boolean gameRunning = false;
+
+    public MiniGameScreen(UIManager uiManager) {
+        super(uiManager);
+        initialize();
+    }
+
+    private void initialize() {
+        setLayout(new BorderLayout());
+
+        // 🟩 상단 제목
+        JLabel titleLabel = LabelBuilder.create("🎮 미니게임을 선택하세요!")
+                .fontSize(20)
+                .bold(true)
+                .alignCenter()
+                .build();
+        add(titleLabel, BorderLayout.NORTH);
+
+        // 🟩 중앙 버튼 패널
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 10, 50));
+
+        JButton colorGameBtn = ButtonBuilder.create("🎨 색깔 기억 게임")
+                .fontSize(16)
+                .build();
+
+        JButton basketGameBtn = ButtonBuilder.create("🧺 바구니 게임")
+                .fontSize(16)
+                .build();
+
+        colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch()));
+        // basketGameBtn.addActionListener(e -> runGameInThread(() -> Basket_ui.main(null)));
+
+        buttonPanel.add(colorGameBtn);
+        buttonPanel.add(basketGameBtn);
+
+        add(buttonPanel, BorderLayout.CENTER);
+
+        
+    }
+
+    private void runGameInThread(Runnable gameLogic) {
+        synchronized (this) {
+            if (gameRunning) return;
+            gameRunning = true;
+        }
+
+        new Thread(() -> {
+            gameLogic.run();
+            synchronized (this) {
+                gameRunning = false;
+            }
+        }).start();
+    }
+}

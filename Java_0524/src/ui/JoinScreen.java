@@ -11,25 +11,30 @@ public class JoinScreen extends BaseScreen {
 
     public JoinScreen(UIManager uiManager) {
         super(uiManager);
+        setBackgroundImage("backgrounds/login_backgroundimage.png");
         initialize();
     }
 
     private void initialize() {
         setLayout(new BorderLayout());
-
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(Color.WHITE);
-
+        JPanel panel = PanelBuilder.create()
+        		.gridBagLayout()
+        		.opaque(false)
+        		.build();
         // 제목
         JLabel title = LabelBuilder.create("회원가입")
             .fontSize(20)
             .bold(true)
             .alignCenter()
+            .opaque(false)
             .build();
         panel.add(title, gbc(0, 0, 2, GridBagConstraints.CENTER));
 
         // 아이디
-        JLabel labelId = LabelBuilder.create("아이디").fontSize(14).build();
+        JLabel labelId = LabelBuilder.create("아이디")
+        		.fontSize(14)
+        		.opaque(false)
+        		.build();
         JTextField tfId = InputFieldBuilder.create()
             .fontSize(14)
             .size(200, 30)
@@ -38,7 +43,10 @@ public class JoinScreen extends BaseScreen {
         panel.add(tfId, gbc(1, 1, 1, GridBagConstraints.WEST));
 
         // 비밀번호
-        JLabel labelPw = LabelBuilder.create("비밀번호").fontSize(14).build();
+        JLabel labelPw = LabelBuilder.create("비밀번호")
+        		.fontSize(14)
+        		.opaque(false)
+        		.build();
         JPasswordField tfPw = (JPasswordField) InputFieldBuilder.password()
             .fontSize(14)
             .size(200, 30)
@@ -87,6 +95,7 @@ public class JoinScreen extends BaseScreen {
         panel.add(btnRegister, gbc(1, 3, 1, GridBagConstraints.WEST));
 
         add(panel, BorderLayout.CENTER);
+        
     }
 
     private GridBagConstraints gbc(int x, int y, int width, int anchor) {

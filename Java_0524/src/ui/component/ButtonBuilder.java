@@ -35,6 +35,12 @@ public class ButtonBuilder {
         button.setFont(new Font(current.getName(), current.getStyle(), size));
         return this;
     }
+    
+    public ButtonBuilder font(String path, float size) {
+        Font font = util.FontUtil.loadFont(path, size); // FontUtil 경로에 맞게 수정
+        button.setFont(font);
+        return this;
+    }
 
     // 굵기 설정
     public ButtonBuilder bold(boolean isBold) {
@@ -66,6 +72,11 @@ public class ButtonBuilder {
     // 정렬 설정 (좌/중앙/우)
     public ButtonBuilder alignCenter() {
         button.setHorizontalAlignment(SwingConstants.CENTER);
+        return this;
+    }
+    
+    public ButtonBuilder opaque(boolean opaque) {
+        button.setOpaque(opaque);
         return this;
     }
 

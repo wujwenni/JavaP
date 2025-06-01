@@ -30,6 +30,22 @@ public class PanelBuilder {
         panel.setLayout(new GridLayout(rows, cols, hgap, vgap));
         return this;
     }
+    
+    public PanelBuilder gridLayout() {
+        panel.setLayout(new GridLayout());
+        return this;
+    }
+    
+    
+    public PanelBuilder gridBagLayout() {
+        panel.setLayout(new GridBagLayout());
+        return this;
+    }
+    
+    public PanelBuilder nullLayout() {
+        panel.setLayout(null);
+        return this;
+    }
 
     // 배경색
     public PanelBuilder background(Color color) {

@@ -42,9 +42,6 @@ public class PlantManagementController {
         else System.out.println("no plant");
     }
 
-    public void handleGameTransition() {
-        // TODO: uiManager.pushScreen(new MiniGameScreen(uiManager));
-    }
 
     public void handleSaveAndExit() {
         plantDataManager.saveAll();

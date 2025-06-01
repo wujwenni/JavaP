@@ -12,48 +12,57 @@ public class LoginScreen extends BaseScreen {
 
     public LoginScreen(UIManager uiManager) {
         super(uiManager);
+        setBackgroundImage("backgrounds/login_backgroundimage.png");
         initialize();
     }
 
     private void initialize() {
         setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBackground(Color.WHITE);
+        JPanel panel = PanelBuilder.create()
+        		.gridBagLayout()
+        		.opaque(false)
+        		.build();
 
         // Title
         JLabel title = LabelBuilder.create("로그인")
-        	.fontSize(20)
+        	.font("/fonts/SUITE-Medium.ttf", 30f)
             .bold(true)
             .alignCenter()
             .build();
         panel.add(title, gbc(0, 0, 2, GridBagConstraints.CENTER));
 
         // 아이디
-        JLabel labelId = LabelBuilder.create("아이디").fontSize(14).build();
+        JLabel labelId = LabelBuilder.create("아이디")
+        		.font("/fonts/SUITE-Medium.ttf", 22f)
+        		.bold(true)
+        		.build();
         JTextField tfId = InputFieldBuilder.create()
-            .fontSize(14)
-            .size(200, 30)
-            .build();
+        		.font("/fonts/SUITE-Medium.ttf", 14f)
+        		.size(200, 30)
+        		.build();
         panel.add(labelId, gbc(0, 1, 1, GridBagConstraints.EAST));
         panel.add(tfId, gbc(1, 1, 1, GridBagConstraints.WEST));
 
         // 비밀번호
-        JLabel labelPw = LabelBuilder.create("비밀번호").fontSize(14).build();
+        JLabel labelPw = LabelBuilder.create("비밀번호")
+        		.font("/fonts/SUITE-Medium.ttf", 22f)
+        		.bold(true)
+        		.build();
         JPasswordField tfPw = (JPasswordField) InputFieldBuilder.password()
-            .fontSize(14)
-            .size(200, 30)
-            .build();
+        		.fontSize(14)
+        		.size(200, 30)
+        		.build();
         panel.add(labelPw, gbc(0, 2, 1, GridBagConstraints.EAST));
         panel.add(tfPw, gbc(1, 2, 1, GridBagConstraints.WEST));
 
         // 버튼
         JButton btnLogin = ButtonBuilder.create("로그인")
-            .fontSize(14)
-            .bold(true)
-            .size(120, 35)
-            .background(Color.white)
-            .foreground(Color.BLACK)
+        		.font("/fonts/SUITE-Medium.ttf", 14f)	
+        		.bold(true)
+        		.size(120, 35)
+        		.background(Color.white)
+        		.foreground(Color.BLACK)
             .onClick(e -> {
                 String id = tfId.getText().trim();
                 String pw = new String(tfPw.getPassword());
@@ -75,8 +84,8 @@ public class LoginScreen extends BaseScreen {
             .build();
 
         JButton btnJoin = ButtonBuilder.create("회원가입")
-        		.fontSize(14)
-             	.bold(true)
+        		.font("/fonts/SUITE-Medium.ttf", 14f)	
+        		.bold(true)
              	.size(120, 35)
                 .background(Color.white)
                 .foreground(Color.BLACK)

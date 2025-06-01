@@ -41,7 +41,7 @@ public class UIManager {
         PlantCareService plantCareService = new PlantCareService(userManager, userPlantDataManager);
         PlantQueryService plantQueryService = new PlantQueryService(userManager, userPlantDataManager);
 
-        // 4. Controllers
+        // 4. Controllersa
         this.userController = new UserController(userManager, userPlantDataManager);
         this.userPlantDataController = new UserPlantDatacontroller(
             plantCareService,

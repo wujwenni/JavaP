@@ -2,6 +2,7 @@ package ui.component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class LabelBuilder {
     private final JLabel label;
@@ -14,15 +15,42 @@ public class LabelBuilder {
     public static LabelBuilder create(String text) {
         return new LabelBuilder(text);
     }
-
+    
+    public LabelBuilder icon(String relativePath, int width, int height) {
+        URL resource = getClass().getClassLoader().getResource(relativePath);
+        if (resource != null) {
+            ImageIcon rawIcon = new ImageIcon(resource);
+            Image scaled = rawIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            label.setIcon(new ImageIcon(scaled));
+        } else {
+            System.err.println("이미지 로딩 실패: " + relativePath);
+        }
+        return this;
+    }
+    
+    public LabelBuilder bounds(int x, int y, int width, int height) {
+        label.setBounds(x, y, width, height);
+        return this;
+    }
+    
+    public LabelBuilder opaque(boolean opaque) {
+        label.setOpaque(opaque);
+        return this;
+    }
     
     public LabelBuilder fontSize(int size) {
         Font current = label.getFont();
         label.setFont(new Font(current.getName(), current.getStyle(), size));
         return this;
     }
-
     
+    public LabelBuilder font(String path, float size) {
+        Font font = util.FontUtil.loadFont(path, size); // FontUtil 경로에 맞게 수정
+        label.setFont(font);
+        return this;
+    }
+    
+   
     public LabelBuilder bold(boolean isBold) {
         Font current = label.getFont();
         label.setFont(new Font(current.getName(), isBold ? Font.BOLD : Font.PLAIN, current.getSize()));

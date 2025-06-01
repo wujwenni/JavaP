@@ -31,6 +31,12 @@ public class InputFieldBuilder {
         textField.setFont(new Font(current.getName(), current.getStyle(), size));
         return this;
     }
+    
+    public InputFieldBuilder font(String path, float size) {
+        Font font = util.FontUtil.loadFont(path, size); // FontUtil 경로에 맞게 수정
+        textField.setFont(font);
+        return this;
+    }
 
     public InputFieldBuilder textColor(Color color) {
         textField.setForeground(color);

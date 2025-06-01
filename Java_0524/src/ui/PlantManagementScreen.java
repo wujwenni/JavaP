@@ -3,15 +3,13 @@ package ui;
 import controller.*;
 import data.transfer.PlantDataTransfer;
 import plant.Plant;
-import ui.component.ButtonBuilder;
-import ui.component.LabelBuilder;
+import ui.component.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PlantManagementScreen extends BaseScreen {
 
-    private JLabel plantImageLabel;
     private PlantDataTransfer selectedPlant;
 
     public PlantManagementScreen(UIManager uiManager, PlantDataTransfer plant) {
@@ -35,14 +33,38 @@ public class PlantManagementScreen extends BaseScreen {
         topPanel.setOpaque(false);
         topPanel.add(saveButton);
         add(topPanel, BorderLayout.NORTH);
-
+        
+        
+        
+        String plantImageFile = selectedPlant.getName() + "_stage1.png"; 
         // 중앙: 식물 이미지 자리 표시자
-        plantImageLabel = LabelBuilder.create("[식물 이미지 자리]")
-                .alignCenter()
-                .fontSize(18)
-                .bold(true)
-                .build();
-        add(plantImageLabel, BorderLayout.CENTER);
+        JPanel plantDisplayPanel = PanelBuilder.create()
+        	    .size(300, 600)
+        	    .opaque(false)
+        	    .nullLayout()
+        	    .add(LabelBuilder.create("")
+        	            .icon("plants/장미_stage1.png", 300, 260)
+        	            .bounds(0, 270, 300, 260)  // 식물 약간 위에
+        	            .build())
+        	    .add(LabelBuilder.create("")
+        	            .icon("pot.png", 300, 180)
+        	            .bounds(0, 450, 300, 150)  // 거의 바닥까지
+        	            .build())
+        	    .build();
+
+        	JPanel centerWrapper = new JPanel(new BorderLayout());
+        	centerWrapper.setOpaque(false);
+        	centerWrapper.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        	centerWrapper.add(plantDisplayPanel, BorderLayout.SOUTH);
+        	add(centerWrapper, BorderLayout.CENTER);
+
+        
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+        centerPanel.add(plantDisplayPanel);
+
+        add(centerPanel, BorderLayout.CENTER);
 
         // 하단: 성장 액션 버튼 + 미니게임 버튼
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
@@ -74,7 +96,7 @@ public class PlantManagementScreen extends BaseScreen {
                 .fontSize(14)
                 .bold(true)
                 .background(new Color(221, 160, 221))
-                .onClick(e -> controller.handleGameTransition())
+                .onClick(e -> Launcher.launchMiniGameSelection(uiManager))
                 .build());
 
         add(buttonPanel, BorderLayout.SOUTH);
