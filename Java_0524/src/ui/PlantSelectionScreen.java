@@ -17,7 +17,8 @@ public class PlantSelectionScreen extends BaseScreen {
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
         setLayout(new BorderLayout());
 
         JPanel panel = new JPanel(new GridBagLayout());

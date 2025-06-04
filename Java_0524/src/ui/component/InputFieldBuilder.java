@@ -1,6 +1,9 @@
 package ui.component;
 
 import javax.swing.*;
+
+import util.FontUtil;
+
 import java.awt.*;
 
 public class InputFieldBuilder {
@@ -26,15 +29,11 @@ public class InputFieldBuilder {
         return this;
     }
 
-    public InputFieldBuilder fontSize(int size) {
-        Font current = textField.getFont();
-        textField.setFont(new Font(current.getName(), current.getStyle(), size));
-        return this;
-    }
-    
-    public InputFieldBuilder font(String path, float size) {
-        Font font = util.FontUtil.loadFont(path, size); // FontUtil 경로에 맞게 수정
-        textField.setFont(font);
+    public InputFieldBuilder fontSize(float size) {
+        Font defaultFont = FontUtil.getDefaultFont();
+        if (defaultFont != null) {
+            textField.setFont(defaultFont.deriveFont(size));
+        }
         return this;
     }
 

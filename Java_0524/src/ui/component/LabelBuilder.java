@@ -1,5 +1,8 @@
 package ui.component;
 
+
+import util.FontUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -11,7 +14,6 @@ public class LabelBuilder {
         this.label = new JLabel(text);
     }
 
-    
     public static LabelBuilder create(String text) {
         return new LabelBuilder(text);
     }
@@ -28,9 +30,25 @@ public class LabelBuilder {
         return this;
     }
     
+    public LabelBuilder icon(String relativePath) {
+        URL resource = getClass().getClassLoader().getResource(relativePath);
+        if (resource != null) {
+            ImageIcon rawIcon = new ImageIcon(resource);
+            label.setIcon(rawIcon);
+        } else {
+            System.err.println("이미지 로딩 실패: " + relativePath);
+        }
+        return this;
+    }
+    
     public LabelBuilder bounds(int x, int y, int width, int height) {
         label.setBounds(x, y, width, height);
         return this;
+    }
+    
+    public LabelBuilder setBorder(Color color, int size) {
+    	label.setBorder(BorderFactory.createLineBorder(color, size));
+    	return this;
     }
     
     public LabelBuilder opaque(boolean opaque) {
@@ -38,15 +56,16 @@ public class LabelBuilder {
         return this;
     }
     
-    public LabelBuilder fontSize(int size) {
-        Font current = label.getFont();
-        label.setFont(new Font(current.getName(), current.getStyle(), size));
-        return this;
+    public LabelBuilder background(Color color) {
+    	label.setBackground(color);
+    	return this;
     }
     
-    public LabelBuilder font(String path, float size) {
-        Font font = util.FontUtil.loadFont(path, size); // FontUtil 경로에 맞게 수정
-        label.setFont(font);
+    public LabelBuilder fontSize(float size) {
+        Font defaultFont = FontUtil.getDefaultFont();
+        if (defaultFont != null) {
+            label.setFont(defaultFont.deriveFont(size));
+        }
         return this;
     }
     

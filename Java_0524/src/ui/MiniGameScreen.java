@@ -16,11 +16,12 @@ public class MiniGameScreen extends BaseScreen {
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
         setLayout(new BorderLayout());
 
         // 🟩 상단 제목
-        JLabel titleLabel = LabelBuilder.create("🎮 미니게임을 선택하세요!")
+        JLabel titleLabel = LabelBuilder.create("미니게임을 선택하세요!")
                 .fontSize(20)
                 .bold(true)
                 .alignCenter()
@@ -32,12 +33,14 @@ public class MiniGameScreen extends BaseScreen {
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 10, 50));
 
-        JButton colorGameBtn = ButtonBuilder.create("🎨 색깔 기억 게임")
-                .fontSize(16)
+        JButton colorGameBtn = ButtonBuilder.create("색깔 기억 게임")
+                .fontSize(24)
+                .background(new Color(207, 233, 99))
                 .build();
 
-        JButton basketGameBtn = ButtonBuilder.create("🧺 바구니 게임")
-                .fontSize(16)
+        JButton basketGameBtn = ButtonBuilder.create("바구니 게임")
+                .fontSize(24)
+                .background(new Color(207, 233, 99))
                 .build();
 
         colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch()));

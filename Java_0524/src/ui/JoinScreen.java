@@ -8,14 +8,14 @@ import java.awt.*;
 
 public class JoinScreen extends BaseScreen {
     
-
     public JoinScreen(UIManager uiManager) {
         super(uiManager);
         setBackgroundImage("backgrounds/login_backgroundimage.png");
         initialize();
     }
-
-    private void initialize() {
+    
+    @Override
+    protected void initialize() {
         setLayout(new BorderLayout());
         JPanel panel = PanelBuilder.create()
         		.gridBagLayout()
@@ -32,7 +32,7 @@ public class JoinScreen extends BaseScreen {
 
         // 아이디
         JLabel labelId = LabelBuilder.create("아이디")
-        		.fontSize(14)
+        		.fontSize(22)
         		.opaque(false)
         		.build();
         JTextField tfId = InputFieldBuilder.create()
@@ -44,7 +44,7 @@ public class JoinScreen extends BaseScreen {
 
         // 비밀번호
         JLabel labelPw = LabelBuilder.create("비밀번호")
-        		.fontSize(14)
+        		.fontSize(22)
         		.opaque(false)
         		.build();
         JPasswordField tfPw = (JPasswordField) InputFieldBuilder.password()

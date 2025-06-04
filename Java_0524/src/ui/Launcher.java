@@ -9,8 +9,8 @@ public class Launcher {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = createMainFrame("Green Friend", 800, 900);
             UIManager uiManager = new UIManager(frame);
-            LoginScreen loginScreen = new LoginScreen(uiManager);
-            frame.setContentPane(loginScreen);
+            EntryScreen entryScreen = new EntryScreen(uiManager);
+            frame.setContentPane(entryScreen);
             frame.setVisible(true);
         });
     }

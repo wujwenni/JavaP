@@ -20,6 +20,11 @@ public class PanelBuilder {
         panel.setLayout(new BorderLayout());
         return this;
     }
+    
+    public PanelBuilder boxLayout(int axis) {
+        panel.setLayout(new BoxLayout(panel, axis));
+        return this;
+    }
 
     public PanelBuilder flowLayout(int align) {
         panel.setLayout(new FlowLayout(align));

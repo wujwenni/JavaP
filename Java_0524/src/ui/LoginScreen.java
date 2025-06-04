@@ -15,8 +15,8 @@ public class LoginScreen extends BaseScreen {
         setBackgroundImage("backgrounds/login_backgroundimage.png");
         initialize();
     }
-
-    private void initialize() {
+    @Override
+    protected void initialize() {
         setLayout(new BorderLayout());
 
         JPanel panel = PanelBuilder.create()
@@ -25,20 +25,19 @@ public class LoginScreen extends BaseScreen {
         		.build();
 
         // Title
-        JLabel title = LabelBuilder.create("로그인")
-        	.font("/fonts/SUITE-Medium.ttf", 30f)
-            .bold(true)
-            .alignCenter()
-            .build();
-        panel.add(title, gbc(0, 0, 2, GridBagConstraints.CENTER));
+        JLabel title = LabelBuilder.create("")
+        	    .icon("components/labels/loginlabel.png", 300, 150)  // 실제 경로와 크기에 맞게 조정
+        	    .alignCenter()
+        	    .build();
+        	panel.add(title, gbc(0, 0, 2, GridBagConstraints.NORTH));
 
         // 아이디
         JLabel labelId = LabelBuilder.create("아이디")
-        		.font("/fonts/SUITE-Medium.ttf", 22f)
+        		.fontSize(22f)
         		.bold(true)
         		.build();
         JTextField tfId = InputFieldBuilder.create()
-        		.font("/fonts/SUITE-Medium.ttf", 14f)
+        		.fontSize(14f)
         		.size(200, 30)
         		.build();
         panel.add(labelId, gbc(0, 1, 1, GridBagConstraints.EAST));
@@ -46,11 +45,10 @@ public class LoginScreen extends BaseScreen {
 
         // 비밀번호
         JLabel labelPw = LabelBuilder.create("비밀번호")
-        		.font("/fonts/SUITE-Medium.ttf", 22f)
+        		.fontSize(22f)
         		.bold(true)
         		.build();
         JPasswordField tfPw = (JPasswordField) InputFieldBuilder.password()
-        		.fontSize(14)
         		.size(200, 30)
         		.build();
         panel.add(labelPw, gbc(0, 2, 1, GridBagConstraints.EAST));
@@ -58,8 +56,8 @@ public class LoginScreen extends BaseScreen {
 
         // 버튼
         JButton btnLogin = ButtonBuilder.create("로그인")
-        		.font("/fonts/SUITE-Medium.ttf", 14f)	
-        		.bold(true)
+        		.fontSize(14f)
+        		//.bold(true)
         		.size(120, 35)
         		.background(Color.white)
         		.foreground(Color.BLACK)
@@ -84,8 +82,8 @@ public class LoginScreen extends BaseScreen {
             .build();
 
         JButton btnJoin = ButtonBuilder.create("회원가입")
-        		.font("/fonts/SUITE-Medium.ttf", 14f)	
-        		.bold(true)
+        		.fontSize(14f)
+        		//.bold(true)
              	.size(120, 35)
                 .background(Color.white)
                 .foreground(Color.BLACK)

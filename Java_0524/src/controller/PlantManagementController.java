@@ -19,12 +19,16 @@ public class PlantManagementController {
         this.selectedPlant = plant;
     }
 
-    public void handleWater() {
+    public boolean handleWater() {
         if (selectedPlant != null) {
-            careService.waterPlant(selectedPlant);
-            System.out.println("water");
+        	System.out.println("water");
+            return careService.waterPlant(selectedPlant);
         }
-        else System.out.println("no plant");
+        else 
+        {
+        	System.out.println("no plant");
+        	return false;
+        }
     }
 
     public void handleTalk() {
@@ -34,12 +38,17 @@ public class PlantManagementController {
         else System.out.println("no plant");
     }
 
-    public void handleFertilize() {
+    public boolean handleFertilize() {
         if (selectedPlant != null) {
-            careService.fertilizePlant(selectedPlant);
             System.out.println("fertilize");
+            return careService.fertilizePlant(selectedPlant);
+            
         }
-        else System.out.println("no plant");
+        else 
+        {
+        	System.out.println("no plant");
+        	return false;
+        }
     }
 
 

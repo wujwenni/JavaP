@@ -10,7 +10,7 @@ public abstract class BaseScreen extends JPanel {
 
 	public BaseScreen(UIManager uiManager) {
 	    this.uiManager = uiManager;
-	    //initializeScreen();
+	    
 	}
     
     public void setBackgroundImage(String relativePath) {
@@ -24,21 +24,15 @@ public abstract class BaseScreen extends JPanel {
         }
     }
     
-    private void initializeScreen() {
-        setBackground(Color.WHITE);
-        setLayout(null);             
-    }
+    protected abstract void initialize();
     
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (backgroundImage != null) {
-            System.out.println("[DEBUG] paintComponent 호출됨: " + getWidth() + "x" + getHeight());
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        } else {
-            System.out.println("[DEBUG] 배경 이미지가 null임");
         }
+        
     }
 
-    
 }

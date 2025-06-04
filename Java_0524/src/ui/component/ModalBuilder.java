@@ -47,8 +47,9 @@ public class ModalBuilder {
         glass.setLayout(new GridBagLayout());
 
         JButton close = ButtonBuilder.create("✕")
-            .noBorder()
-            .foreground(Color.GRAY)
+            .Border()
+            .background(Color.RED)
+            .foreground(Color.WHITE)
             .onClick(e -> {
                 glass.setVisible(false);
                 onClose.run();

@@ -22,7 +22,8 @@ public class ColorGameScreen extends BaseScreen implements ColorGameUI {
         initialize();
     }
     
-    private void initialize() {
+    @Override
+    protected void initialize() {
         setLayout(new BorderLayout());
 
         // 패널 구성

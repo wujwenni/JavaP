@@ -5,6 +5,16 @@ import java.awt.GraphicsEnvironment;
 import java.io.InputStream;
 
 public class FontUtil {
+	
+	private static Font defaultFont;
+
+    public static void initDefaultFont(String path, float size) {
+        defaultFont = loadFont(path, size);
+    }
+
+    public static Font getDefaultFont() {
+        return defaultFont;
+    }
     
     public static Font loadFont(String path, float size) {
         try (InputStream is = FontUtil.class.getResourceAsStream(path)) {
