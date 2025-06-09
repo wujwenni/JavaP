@@ -4,13 +4,15 @@ import games.Color_game;
 
 import javax.swing.*;
 import java.util.function.Consumer;
+import ui.UIManager;
 
 public class ColorGameLauncher {
-
-    public static void launch() {
+	
+    public static void launch(UIManager uiManager) {
         JFrame frame = new JFrame("색깔 기억 게임");
         ColorGameScreen screen = new ColorGameScreen(null, result -> {
-            System.out.println("게임 결과: " + result);
+        	uiManager.getRewardController().giveWaterTickets(result);
+        	System.out.println("게임 결과: " + result);
             frame.dispose();
         });
 

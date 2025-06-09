@@ -16,8 +16,8 @@ public class User {
     public User(String id, String password) {
         this.id = id;
         this.password = password;
-        this.fertilizerTickets = 100;
-        this.waterTickets = 100;
+        this.fertilizerTickets = 0;
+        this.waterTickets = 0;
    
     }
 

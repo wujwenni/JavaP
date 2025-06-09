@@ -1,6 +1,11 @@
 package ui;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
+
+import controller.PlantManagementController;
+import ui.component.OptionPaneBuilder;
 
 public class Launcher {
 
@@ -10,7 +15,26 @@ public class Launcher {
             JFrame frame = createMainFrame("Green Friend", 800, 900);
             UIManager uiManager = new UIManager(frame);
             EntryScreen entryScreen = new EntryScreen(uiManager);
+            PlantManagementController controller = uiManager.getplantManagementController();
             frame.setContentPane(entryScreen);
+            frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            frame.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    OptionPaneBuilder.create()
+                        .parent(frame)
+                        .title("종료 확인")
+                        .message("정말 종료하시겠습니까?")
+                        .type(OptionPaneBuilder.Type.CONFIRM)
+                        .onConfirm(() -> {
+                            controller.handleSave();
+                            frame.dispose();
+                            System.exit(0);
+                        })
+                        .show();
+                }
+            });
+
             frame.setVisible(true);
         });
     }
@@ -24,6 +48,25 @@ public class Launcher {
             gameFrame.setVisible(true);
         });
     }
+    
+    public static void launchGardenScreen(UIManager uiManager) {
+    	SwingUtilities.invokeLater(() -> {
+            JFrame gardenFrame = createSubFrame("화단", 1600, 900);
+            GardenScreen gardenScreen = new GardenScreen(uiManager);
+            gardenFrame.setContentPane(gardenScreen);
+            gardenFrame.setVisible(true);
+        });
+    }
+    
+    public static void launchChatScreen(UIManager uiManager, Runnable onCloseCallback) {
+        JFrame frame = new JFrame("Chat");
+        ChattingScreen screen = new ChattingScreen(uiManager);
+        screen.setOnCloseCallback(onCloseCallback); // 창 닫힐 때 실행할 콜백 등록
+        frame.setContentPane(screen);
+        frame.setSize(400, 600);
+        frame.setVisible(true);
+    }
+
 
     // ✅ 메인 프레임 생성
     private static JFrame createMainFrame(String title, int width, int height) {

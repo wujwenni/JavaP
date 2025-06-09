@@ -14,6 +14,8 @@ public class UIManager {
     private final UserController userController;
     private final UserPlantDatacontroller userPlantDataController;
     private final PlantManagementController plantManagementController;
+    private final RewardController rewardController;
+    
 
     public UserController getUserController() {
         return userController;
@@ -25,6 +27,10 @@ public class UIManager {
 
     public PlantManagementController getplantManagementController() {
         return plantManagementController;
+    }
+    
+    public RewardController getRewardController() {
+    	return rewardController;
     }
 
     public UIManager(JFrame frame) {
@@ -40,6 +46,7 @@ public class UIManager {
         // 3. Services
         PlantCareService plantCareService = new PlantCareService(userManager, userPlantDataManager);
         PlantQueryService plantQueryService = new PlantQueryService(userManager, userPlantDataManager);
+        RewardService rewardService = new RewardService(userManager, userPlantDataManager);
 
         // 4. Controllersa
         this.userController = new UserController(userManager, userPlantDataManager);
@@ -50,6 +57,9 @@ public class UIManager {
             userManager
         );
         this.plantManagementController = new PlantManagementController(userManager, userPlantDataManager);
+        this.rewardController = new RewardController(rewardService, userPlantDataManager);
+        
+        
     }
 
     public void showScreen(JPanel screen) {

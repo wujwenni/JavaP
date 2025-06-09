@@ -64,7 +64,7 @@ public class Color_game {
 
         // UI에 결과 전달 (성공 여부)
         if (ui instanceof ui.minigames.ColorGameScreen screen) {
-            screen.getResultCallback().accept(success);
+            screen.getResultCallback().accept(totalReward);
         }
     }
 

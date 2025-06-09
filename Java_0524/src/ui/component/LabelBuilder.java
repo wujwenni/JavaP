@@ -104,6 +104,11 @@ public class LabelBuilder {
         label.setHorizontalAlignment(SwingConstants.RIGHT);
         return this;
     }
+    
+    public LabelBuilder verticalAlignment(int alignment) {
+        label.setVerticalAlignment(alignment);
+        return this;
+    }
 
     
     public JLabel build() {

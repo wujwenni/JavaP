@@ -7,14 +7,18 @@ import java.awt.*;
 public class PanelBuilder {
     private final JPanel panel;
 
-    private PanelBuilder() {
-        this.panel = new JPanel();
+    private PanelBuilder(JPanel panel) {
+        this.panel = panel;
     }
 
+    /** 기존 빈 JPanel 생성용 */
     public static PanelBuilder create() {
-        return new PanelBuilder();
+        return new PanelBuilder(new JPanel());
     }
-
+    
+    public static PanelBuilder create(JPanel customPanel) {
+        return new PanelBuilder(customPanel);
+    }
     // 레이아웃 지정
     public PanelBuilder borderLayout() {
         panel.setLayout(new BorderLayout());
@@ -28,6 +32,11 @@ public class PanelBuilder {
 
     public PanelBuilder flowLayout(int align) {
         panel.setLayout(new FlowLayout(align));
+        return this;
+    }
+    
+    public PanelBuilder flowLayout(int align, int vgap, int hgap) {
+        panel.setLayout(new FlowLayout(align, vgap, hgap));
         return this;
     }
 

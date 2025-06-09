@@ -25,7 +25,7 @@ public class PlantSelectionScreen extends BaseScreen {
         panel.setBackground(Color.WHITE);
 
         // 제목
-        JLabel title = LabelBuilder.create("🌱 키울 식물을 선택하세요!")
+        JLabel title = LabelBuilder.create("키울 식물을 선택하세요!")
             .fontSize(20)
             .bold(true)
             .alignCenter()

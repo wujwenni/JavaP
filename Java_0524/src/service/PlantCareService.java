@@ -48,37 +48,67 @@ public class PlantCareService {
 
     // PlantDataTransfer를 받아서 처리 (Plant 객체와 동기화)
     public boolean waterPlant(PlantDataTransfer plantDTO) {
-        User user = userManager.getCurrentUser();
-        if (user == null || plantDTO == null || !user.useWaterTicket()) return false;
-
-        UserPlantData data = plantDataManager.getCurrentUserData(user);
+    	User user = userManager.getCurrentUser();
+    	UserPlantData data = plantDataManager.getCurrentUserData(user);
         Plant targetPlant = findPlant(data, plantDTO);
-        if (targetPlant == null) return false;
-
         
-        targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
-        plantDTO.setGrowth(targetPlant.getGrowth());
-        userManager.saveCurrentUser();
-        data.useWaterTicket();
-        plantDataManager.update(data);
-        return true;
+        if (user == null || plantDTO == null) return false;
+        if (targetPlant == null) return false;        
+        if (data.getWaterTickets() <= 0) {
+            System.out.println("❌ [Service] 물 티켓이 부족합니다.");
+            return false;
+        }
+        else {
+        	targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
+            plantDTO.setGrowth(targetPlant.getGrowth());
+            userManager.saveCurrentUser();
+            data.useWaterTicket();
+            plantDataManager.update(data);
+            System.out.println("true");
+            return true;
+        }
     }
 
     public boolean fertilizePlant(PlantDataTransfer plantDTO) {
-        User user = userManager.getCurrentUser();
-        if (user == null || plantDTO == null || !user.useFertilizerTicket()) return false;
-
-        UserPlantData data = plantDataManager.getCurrentUserData(user);
+    	User user = userManager.getCurrentUser();
+    	UserPlantData data = plantDataManager.getCurrentUserData(user);
         Plant targetPlant = findPlant(data, plantDTO);
+        if (user == null || plantDTO == null) return false;
         if (targetPlant == null) return false;
-
+        if (data.getFertilizerTickets() <= 0) {
+            System.out.println("❌ [Service] 비료 티켓이 부족합니다.");
+            return false;
+        }
+        else {
+        	targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
+            plantDTO.setGrowth(targetPlant.getGrowth());
+            userManager.saveCurrentUser();
+            data.useFertilizerTicket();
+            plantDataManager.update(data);
+            System.out.println("true");
+            return true;
+        }
+    }
+    
+    public boolean chatPlant(PlantDataTransfer plantDTO, boolean b) {
+    	User user = userManager.getCurrentUser();
+    	UserPlantData data = plantDataManager.getCurrentUserData(user);
+        Plant targetPlant = findPlant(data, plantDTO);
         
-        targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
-        plantDTO.setGrowth(targetPlant.getGrowth());
-        userManager.saveCurrentUser();
-        data.useFertilizerTicket();
-        plantDataManager.update(data);
-        return true;
+        if (user == null || plantDTO == null) return false;
+        
+        if (targetPlant == null) return false;
+    	
+        if(b) {
+    		targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
+    		plantDTO.setGrowth(targetPlant.getGrowth());
+            userManager.saveCurrentUser();
+            data.useFertilizerTicket();
+            plantDataManager.update(data);
+    		return true;
+    	}
+        
+    	else return false;
     }
 
     // PlantDataTransfer에 해당하는 Plant 객체 찾기

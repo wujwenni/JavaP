@@ -2,6 +2,7 @@ package ui;
 
 import ui.component.ButtonBuilder;
 import ui.component.LabelBuilder;
+import ui.minigames.BasketGameLauncher;
 import ui.minigames.ColorGameLauncher;
 
 import javax.swing.*;
@@ -43,8 +44,8 @@ public class MiniGameScreen extends BaseScreen {
                 .background(new Color(207, 233, 99))
                 .build();
 
-        colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch()));
-        // basketGameBtn.addActionListener(e -> runGameInThread(() -> Basket_ui.main(null)));
+        colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch(uiManager)));
+        basketGameBtn.addActionListener(e -> runGameInThread(() -> BasketGameLauncher.launch(uiManager)));
 
         buttonPanel.add(colorGameBtn);
         buttonPanel.add(basketGameBtn);

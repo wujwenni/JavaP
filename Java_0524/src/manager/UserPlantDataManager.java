@@ -2,6 +2,7 @@ package manager;
 
 import data.User;
 import data.UserPlantData;
+import data.transfer.UserPlantDataTransfer;
 import repository.UserPlantDataRepository;
 
 import java.util.*;
@@ -12,8 +13,14 @@ public class UserPlantDataManager {
 
     public UserPlantDataManager(UserPlantDataRepository repository) {
         this.repository = repository;
-        this.dataMap = new HashMap<>(repository.loadAll()); // 초기 데이터 로딩
+        this.dataMap = new HashMap<>();
+
+        Map<String, UserPlantData> loaded = repository.loadAll();
+        for (Map.Entry<String, UserPlantData> entry : loaded.entrySet()) {
+            dataMap.put(entry.getKey(), entry.getValue());
+        }
     }
+
 
     public UserPlantData getCurrentUserData(User currentUser) {
         return (currentUser == null) ? null : dataMap.get(currentUser.getId());
@@ -31,15 +38,20 @@ public class UserPlantDataManager {
 
     public void registerIfAbsent(User user) {
         if (!dataMap.containsKey(user.getId())) {
-            dataMap.put(user.getId(), 
-            		new UserPlantData(user.getId(), 
-            				user.getWaterTickets(), 
-            				user.getFertilizerTickets()));
+            UserPlantData vo = new UserPlantData(
+                user.getId(),
+                user.getWaterTickets(),
+                user.getFertilizerTickets()
+            );
+            
+            dataMap.put(user.getId(), vo);
         }
     }
 
+
     public void saveAll() {
-        List<UserPlantData> list = new ArrayList<>(dataMap.values());
+    	List<UserPlantData> list = dataMap.values().stream()
+    	        .toList();
         System.out.println("🧪 [Manager] 저장할 유저 수: " + list.size());
         
         for (UserPlantData data : list) {
@@ -57,4 +69,5 @@ public class UserPlantDataManager {
     public Map<String, UserPlantData> getAll() {
         return Collections.unmodifiableMap(dataMap);
     }
+
 }

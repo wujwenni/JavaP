@@ -6,8 +6,8 @@ import java.awt.*;
 public class ModalBuilder {
 	private final JFrame owner;
     private JPanel content;
-    private int width = 300;
-    private int height = 200;
+    private int width = 400;
+    private int height = 300;
     private Runnable onClose = () -> {};
 
     private ModalBuilder(JFrame owner) {

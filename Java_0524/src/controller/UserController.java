@@ -27,8 +27,7 @@ public class UserController {
 
     // 회원가입 처리
     public boolean register(UserDataTransfer dto) {
-    	User user = new User(dto.getId(), dto.getPassword(), 
-        		dto.getWaterTickets(), dto.getFertilizerTickets());
+    	User user = new User(dto.getId(), dto.getPassword());
         return userManager.register(user);
     }
 

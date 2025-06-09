@@ -14,9 +14,9 @@ public class ColorGameScreen extends BaseScreen implements ColorGameUI {
 
     private int userClick = -1;
     private final Object lock = new Object();
-    private final Consumer<Boolean> resultCallback;
+    private final Consumer<Integer> resultCallback;
 
-    public ColorGameScreen(UIManager uiManager, Consumer<Boolean> resultCallback) {
+    public ColorGameScreen(UIManager uiManager, Consumer<Integer> resultCallback) {
         super(uiManager);
         this.resultCallback = resultCallback;
         initialize();
@@ -91,7 +91,7 @@ public class ColorGameScreen extends BaseScreen implements ColorGameUI {
         colorPanel.repaint();
     }
 
-    public Consumer<Boolean> getResultCallback() {
+    public Consumer<Integer> getResultCallback() {
         return resultCallback;
     }
 

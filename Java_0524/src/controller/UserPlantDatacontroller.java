@@ -35,16 +35,14 @@ public class UserPlantDatacontroller {
         plantDataManager.saveAll();
 
         return new PlantDataTransfer(plant.getName(), plant.getGrowth());
-    }
+    } 
+
 
     
     public List<Plant> getOwnedPlantsForCurrentUser() {
-        User user = userManager.getCurrentUser();
-        if (user == null) return Collections.emptyList();
-        UserPlantData data = plantDataManager.getCurrentUserData(user);
-        return (data != null) ? data.getOwnedPlants() : Collections.emptyList();
+        UserPlantDataTransfer dto = getCurrentPlantInfo();
+        return (dto != null) ? new ArrayList<>(dto.getOwnedPlants()) : Collections.emptyList();
     }
-    
     // ✅ 수동 저장 (저장 후 종료 등)
     public void save() {
         plantDataManager.saveAll();
