@@ -6,10 +6,4 @@ public class Tulip extends Plant {
         super("튤립", growth);
     }
 
-    @Override
-    public String talk(String word) {
-        this.word = word;
-        return this.word;
-    }
-
 }

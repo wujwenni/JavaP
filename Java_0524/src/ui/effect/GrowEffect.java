@@ -12,20 +12,7 @@ import java.net.URL;
  * 아래→위로 자라는 애니메이션과 함께 스테이지별 이미지를 세팅해 주는 유틸리티 클래스입니다.
  */
 public class GrowEffect {
-    /**
-     * 스테이지(stage0~4)에 맞춰 JLabel의 아이콘·크기·위치를 세팅하고,
-     * 아래→위로 자라는 애니메이션을 실행합니다.
-     *
-     * @param label       성장 애니메이션을 적용할 JLabel
-     * @param panelW      패널 전체 너비 (가로 중앙 정렬용)
-     * @param potTopY     화분 꼭대기 Y 좌표 (이미지 바닥 앵커)
-     * @param fullW       만개 이미지 원본 너비
-     * @param fullH       만개 이미지 원본 높이
-     * @param stage       성장 단계 (0: 숨김, 1~3: 스프라우트, 4: 풀블룸)
-     * @param plantName   "rose", "tulip", "sunflower" 중 하나 (stage4에서만 사용)
-     * @param durationMs  애니메이션 전체 시간(밀리초)
-     * @param steps       애니메이션 프레임 수
-     */
+    
     public static void updateAndPlay(JLabel label,
                                      int panelW,
                                      int potTopY,
@@ -84,14 +71,6 @@ public class GrowEffect {
         timer.start();
     }
 
-    /**
-     * 리소스 경로에서 이미지를 로드해 주어진 크기로 스무스 리사이징한 ImageIcon을 반환합니다.
-     *
-     * @param resourcePath 클래스패스 내 이미지 경로
-     * @param w            출력 너비
-     * @param h            출력 높이
-     * @return 리사이즈된 ImageIcon, 로드 실패 시 null
-     */
     private static ImageIcon resizeIcon(String resourcePath, int w, int h) {
         URL url = GrowEffect.class.getClassLoader().getResource(resourcePath);
         if (url == null) {

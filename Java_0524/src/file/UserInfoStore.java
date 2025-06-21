@@ -7,8 +7,10 @@ import java.util.*;
 public class UserInfoStore {
     private static final String FILE_PATH = "users.txt";
 
-    // User 정보를 파일에 저장 (기존 내용 덮어쓰기)
+    // User 정보를 파일에 저장 or 덮어쓰기.
     public void saveAll(Collection<User> users) {
+    	// 인자 타입을 컬렉션으로 지정해 List, Set, ArrayList로도 받을 수 있음.
+    	// try-catch로 감싸 예외처리, 리소스 관리 용이성 높임 (명시적인 종료 하지 않아도 됨)
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
             for (User user : users) {
                 writer.write(String.format("%s,%s,%d,%d",
@@ -19,7 +21,7 @@ public class UserInfoStore {
                 writer.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // 오류 발생 시 콘솔 창에 호출 경로 출력.
         }
     }
 
@@ -39,9 +41,10 @@ public class UserInfoStore {
                 }
             }
         } catch (IOException e) {
-            // 파일이 없을 수 있음
+            // 예외 처리
+        	e.printStackTrace();
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+        	e.printStackTrace();
         }
         return userMap;
     }

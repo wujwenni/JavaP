@@ -1,4 +1,5 @@
 package data;
+
 import plant.Plant;
 import java.util.*;
 
@@ -7,7 +8,6 @@ public class UserPlantData {
     private final List<Plant> ownedPlants;
     private int waterTickets;
     private int fertilizerTickets;
-    
     
     public UserPlantData(String userId, int waterTickets, int fertilizerTickets) {
         this.userId = userId;
@@ -56,7 +56,7 @@ public class UserPlantData {
         }
         return false;
     }
-
+    
     public void addWaterTickets(int amount) {
         if (amount > 0) {
             waterTickets += amount;

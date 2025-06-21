@@ -43,11 +43,14 @@ public class PlantSelectionScreen extends BaseScreen {
     private JButton createPlantButton(String plantName) {
         UserPlantDatacontroller controller = uiManager.getUserPlantDataController();
 
-        return ButtonBuilder.create("🌿 " + plantName)
+        return ButtonBuilder.create(plantName)
             .fontSize(16)
             .bold(true)
             .size(140, 50)
-            .background(Color.WHITE)
+            .background(plantName.equals("장미") 		? new Color(233, 60, 60)   :
+            			plantName.equals("튤립") 		? new Color(233, 161, 136) :
+            			plantName.equals("해바라기") 	? new Color(255, 255, 153) :
+            										  new Color(207, 233, 99))
             .foreground(Color.BLACK)
             .onClick(e -> {
                 PlantDataTransfer dto = controller.selectInitialPlant(plantName);

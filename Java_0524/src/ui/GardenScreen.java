@@ -25,16 +25,17 @@ public class GardenScreen extends BaseScreen {
 	protected void initialize() {
 	    setLayout(new BorderLayout());
 
-	    idLabel = LabelBuilder.create(dto.getUserId())
-	        .fontSize(14f)
+	    idLabel = LabelBuilder.create(dto.getUserId() + "의 화단")
+	        .fontSize(24f)
 	        .opaque(false)
-	        .alignLeft()
+	        .alignCenter()
 	        .build();
 	    add(idLabel, BorderLayout.NORTH);
 
 	    gardenPanel = PanelBuilder.create()
 	        .gridLayout(5, 9, 5, 5)
-	        .opaque(false)
+	        .opaque(true)
+	        .background(new Color(128, 72, 22))
 	        .build();
 
 	    
@@ -43,16 +44,24 @@ public class GardenScreen extends BaseScreen {
 	    List<Plant> grownPlants = dto.getOwnedPlants().stream()
 	        .filter(p -> p.getGrowth() == 100)
 	        .toList();
-
+	    
 	    for (int i = 0; i < totalCells; i++) {
-	        JPanel cell = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-	        cell.setOpaque(false);
+	        // 짝수(i % 2 == 0)면 image2, 홀수면 image1
+	        String bgPath = (i % 2 == 0)
+	            ? "components/labels/garden2.png"
+	            : "components/labels/garden1.png";
 
+	        JPanel cell = PanelBuilder.create()
+	            .flowLayout(FlowLayout.LEFT)
+	            .backgroundImage(bgPath)  // 여기서 동적으로 경로 지정
+	            .opaque(false)
+	            .build();
+
+	        // (성장된 식물이 있으면 아이콘 추가하는 로직)
 	        if (i < grownPlants.size()) {
 	            Plant plant = grownPlants.get(i);
 	            JLabel plantLabel = LabelBuilder.create("")
-	                .icon("plants/" + plant.getName() + "_stage1.png", 100, 100)
-	                .alignLeft()
+	                .icon("plants/" + plant.getName() + "_stage4.png", 150, 150)
 	                .build();
 	            cell.add(plantLabel);
 	        }

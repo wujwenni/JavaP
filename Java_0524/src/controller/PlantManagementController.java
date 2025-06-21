@@ -4,7 +4,6 @@ import data.transfer.*;
 import manager.*;
 import service.ChatTracker;
 import service.PlantCareService;
-import service.PlantQueryService;
 
 
 public class PlantManagementController {

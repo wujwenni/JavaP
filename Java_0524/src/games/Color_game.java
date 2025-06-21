@@ -62,7 +62,7 @@ public class Color_game {
                 "게임 종료!\n획득한 티켓: " + totalReward +
                 "\n" + (success ? "성공!" : "실패!"));
 
-        // UI에 결과 전달 (성공 여부)
+        // UI에 결과 전달
         if (ui instanceof ui.minigames.ColorGameScreen screen) {
             screen.getResultCallback().accept(totalReward);
         }

@@ -6,6 +6,7 @@ public class UserDataTransfer {
     private int waterTickets;
     private int fertilizerTickets;
 
+    // 기본 사용자 식물 정보 DTO 생성자
     public UserDataTransfer(String id, String password, int watertickets, int fertilizertickets) {
         this.id = id;
         this.password = password;
@@ -13,11 +14,13 @@ public class UserDataTransfer {
         this.fertilizerTickets = fertilizertickets;
     }
     
+    
+    // 초기 사용자 식물 정보 DTO 생성자
     public UserDataTransfer(String id, String password) {
     	this.id = id;
         this.password = password;
-        this.waterTickets = 100;
-        this.fertilizerTickets = 100;
+        this.waterTickets = 0;
+        this.fertilizerTickets = 0;
     }
 
     public String getId() {

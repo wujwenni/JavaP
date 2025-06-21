@@ -14,13 +14,14 @@ public class UserController {
         this.userManager = userManager;
         this.plantDataManager = plantDataManager;
     }
-
+    
+    // 로그인 처리
     public boolean login(UserDataTransfer dto) {
         User user = new User(dto.getId(), dto.getPassword(), 
         		dto.getWaterTickets(), dto.getFertilizerTickets());
         boolean result = userManager.login(user);
         if (result) {
-            plantDataManager.registerIfAbsent(user);  // ✅ 컨트롤러 내부에서 처리
+            plantDataManager.registerIfAbsent(user);
         }
         return result;
     }

@@ -1,7 +1,7 @@
 package plant;
 
 
-public abstract class Plant {
+public class Plant {
     protected final String name;
     protected int growth;
     protected String word;
@@ -34,6 +34,4 @@ public abstract class Plant {
         this.word = word;
     }
 
-    // 식물별 고유 반응 → 하위 클래스에서 구현
-    public abstract String talk(String word);
 }

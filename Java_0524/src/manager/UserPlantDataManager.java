@@ -2,14 +2,15 @@ package manager;
 
 import data.User;
 import data.UserPlantData;
-import data.transfer.UserPlantDataTransfer;
 import repository.UserPlantDataRepository;
 
 import java.util.*;
 
+// 사용자 id와 매칭하여 식물 성장 상태, 티켓 개수 데이터를 메모리에서 관리하고 필요한 경우 저장소와 동기화 함.
+// 작동 기반 객체는 UserPlantData.
 public class UserPlantDataManager {
     private final UserPlantDataRepository repository;
-    private final Map<String, UserPlantData> dataMap;
+    private final Map<String, UserPlantData> dataMap; //
 
     public UserPlantDataManager(UserPlantDataRepository repository) {
         this.repository = repository;
@@ -20,7 +21,6 @@ public class UserPlantDataManager {
             dataMap.put(entry.getKey(), entry.getValue());
         }
     }
-
 
     public UserPlantData getCurrentUserData(User currentUser) {
         return (currentUser == null) ? null : dataMap.get(currentUser.getId());
@@ -48,26 +48,9 @@ public class UserPlantDataManager {
         }
     }
 
-
     public void saveAll() {
     	List<UserPlantData> list = dataMap.values().stream()
     	        .toList();
-        System.out.println("🧪 [Manager] 저장할 유저 수: " + list.size());
-        
-        for (UserPlantData data : list) {
-            System.out.printf(" - [%s] 물 티켓: %d, 비료 티켓: %d, 보유 식물 수: %d개%n",
-                data.getUserId(),
-                data.getWaterTickets(),
-                data.getFertilizerTickets(),
-                data.getOwnedPlants().size()
-            );
-        }
-
         repository.saveAll(list);
     }
-
-    public Map<String, UserPlantData> getAll() {
-        return Collections.unmodifiableMap(dataMap);
-    }
-
 }

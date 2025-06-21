@@ -5,7 +5,8 @@ public class User {
     private final String password;
     private int waterTickets;
     private int fertilizerTickets;
-
+    
+    // 티켓 가지고 있는 유저에 대한 생성자.
     public User(String id, String password, int watertickets, int fertilizertickets) {
         this.id = id;
         this.password = password;
@@ -13,6 +14,7 @@ public class User {
         this.fertilizerTickets = fertilizertickets;
     }
     
+    // 초기 구성 생성자.
     public User(String id, String password) {
         this.id = id;
         this.password = password;
@@ -20,7 +22,8 @@ public class User {
         this.waterTickets = 0;
    
     }
-
+    
+    // getter
     public String getId() {
         return id;
     }
@@ -40,7 +43,7 @@ public class User {
     public boolean useWaterTicket() {
         if (waterTickets > 0) {
             waterTickets--;
-            System.out.println("use" + waterTickets);
+            //System.out.println("use" + waterTickets);
             return true;
         }
         return false;
@@ -49,7 +52,7 @@ public class User {
     public boolean useFertilizerTicket() {
         if (fertilizerTickets > 0) {
             fertilizerTickets--;
-            System.out.println("use" + fertilizerTickets);
+            //System.out.println("use" + fertilizerTickets);
             return true;
         }
         return false;

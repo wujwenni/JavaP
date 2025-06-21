@@ -55,7 +55,7 @@ public class PlantCareService {
         if (user == null || plantDTO == null) return false;
         if (targetPlant == null) return false;        
         if (data.getWaterTickets() <= 0) {
-            System.out.println("❌ [Service] 물 티켓이 부족합니다.");
+            System.out.println("물 티켓이 부족합니다."); // for debug
             return false;
         }
         else {
@@ -76,7 +76,7 @@ public class PlantCareService {
         if (user == null || plantDTO == null) return false;
         if (targetPlant == null) return false;
         if (data.getFertilizerTickets() <= 0) {
-            System.out.println("❌ [Service] 비료 티켓이 부족합니다.");
+            System.out.println("in service, no ftickets");
             return false;
         }
         else {
@@ -96,9 +96,7 @@ public class PlantCareService {
         Plant targetPlant = findPlant(data, plantDTO);
         
         if (user == null || plantDTO == null) return false;
-        
         if (targetPlant == null) return false;
-    	
         if(b) {
     		targetPlant.increaseGrowth(3 + (int)(Math.random() * (5 - 3 + 1)));
     		plantDTO.setGrowth(targetPlant.getGrowth());
@@ -115,7 +113,7 @@ public class PlantCareService {
     private Plant findPlant(UserPlantData data, PlantDataTransfer plantDTO) {
         for (Plant plant : data.getOwnedPlants()) {
             if (plant.getName().equals(plantDTO.getName()) && plant.getGrowth() == plantDTO.getGrowth()) {
-                // 이름과 성장도가 같으면 같은 객체로 간주 (id가 있다면 id로 비교)
+                // 성장도로 구분.
                 return plant;
             }
         }

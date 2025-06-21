@@ -5,7 +5,7 @@ import javax.swing.border.*;
 import java.awt.*;
 
 public class PanelBuilder {
-    private final JPanel panel;
+    private JPanel panel;
 
     private PanelBuilder(JPanel panel) {
         this.panel = panel;
@@ -103,6 +103,42 @@ public class PanelBuilder {
         panel.add(comp, constraints);
         return this;
     }
+    
+    public PanelBuilder backgroundImage(String imagePath) {
+        // 1) 기존 속성 저장
+        LayoutManager lm   = panel.getLayout();
+        Border        bd   = panel.getBorder();
+        boolean       opa  = panel.isOpaque();
+        Component[]   comps = panel.getComponents();
+
+        // 2) 이미지 로드
+        ImageIcon icon = new ImageIcon(
+            getClass().getClassLoader().getResource(imagePath)
+        );
+        Image bg = icon.getImage();
+
+        // 3) 익명 서브클래스 패널 생성
+        JPanel imgPanel = new JPanel(lm) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        imgPanel.setBorder(bd);
+        imgPanel.setOpaque(opa);
+
+        // 4) 기존 자식 컴포넌트 옮기기
+        for (Component c : comps) {
+            panel.remove(c);
+            imgPanel.add(c);
+        }
+
+        // 5) 레퍼런스 교체
+        this.panel = imgPanel;
+        return this;
+    }
+
     
     public JPanel build() {
         return panel;

@@ -84,7 +84,7 @@ public class ButtonBuilder {
         JButton btn;
 
         if (cooldownEnabled) {
-            // ✅ 쿨타임 + 시각 효과 포함된 버튼 생성
+            //쿨타임 + 시각 효과 포함된 버튼 생성
             btn = new JButton(text) {
                 @Override
                 protected void paintComponent(Graphics g) {
