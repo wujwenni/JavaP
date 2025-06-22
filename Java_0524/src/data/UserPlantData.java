@@ -17,9 +17,6 @@ public class UserPlantData {
     }
 
     // 최초 생성 시 User 객체 기반
-    public UserPlantData(User user) {
-        this(user.getId(), user.getWaterTickets(), user.getFertilizerTickets());
-    }
 
     public String getUserId() {
         return userId;

@@ -24,7 +24,6 @@ public class PlantManagementController {
     }
 
     public boolean handleWater() {
-    	if (careService.waterPlant(selectedPlant)) System.out.println("true");
     	return careService.waterPlant(selectedPlant);
     }
 

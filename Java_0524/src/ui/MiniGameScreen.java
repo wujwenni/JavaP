@@ -21,7 +21,7 @@ public class MiniGameScreen extends BaseScreen {
     protected void initialize() {
         setLayout(new BorderLayout());
 
-        // 🟩 상단 제목
+        //상단 제목
         JLabel titleLabel = LabelBuilder.create("미니게임을 선택하세요!")
                 .fontSize(20)
                 .bold(true)
@@ -29,7 +29,7 @@ public class MiniGameScreen extends BaseScreen {
                 .build();
         add(titleLabel, BorderLayout.NORTH);
 
-        // 🟩 중앙 버튼 패널
+        //중앙 버튼 패널
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 10, 50));

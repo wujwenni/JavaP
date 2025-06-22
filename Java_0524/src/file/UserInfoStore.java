@@ -13,11 +13,10 @@ public class UserInfoStore {
     	// try-catch로 감싸 예외처리, 리소스 관리 용이성 높임 (명시적인 종료 하지 않아도 됨)
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
             for (User user : users) {
-                writer.write(String.format("%s,%s,%d,%d",
+                writer.write(String.format("%s,%s",
                     user.getId(),
-                    user.getPassword(),
-                    user.getWaterTickets(),
-                    user.getFertilizerTickets()));
+                    user.getPassword()
+                    ));
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -32,12 +31,10 @@ public class UserInfoStore {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                if (tokens.length == 4) {
+                if (tokens.length == 2) {
                     String id = tokens[0];
                     String pw = tokens[1];
-                    int waterTickets = Integer.parseInt(tokens[2]);
-                    int fertilizerTickets = Integer.parseInt(tokens[3]);
-                    userMap.put(id, new User(id, pw, waterTickets, fertilizerTickets));
+                    userMap.put(id, new User(id, pw));
                 }
             }
         } catch (IOException e) {

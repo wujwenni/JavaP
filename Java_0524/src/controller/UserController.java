@@ -17,8 +17,7 @@ public class UserController {
     
     // 로그인 처리
     public boolean login(UserDataTransfer dto) {
-        User user = new User(dto.getId(), dto.getPassword(), 
-        		dto.getWaterTickets(), dto.getFertilizerTickets());
+        User user = new User(dto.getId(), dto.getPassword());
         boolean result = userManager.login(user);
         if (result) {
             plantDataManager.registerIfAbsent(user);

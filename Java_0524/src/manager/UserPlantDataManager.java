@@ -40,8 +40,7 @@ public class UserPlantDataManager {
         if (!dataMap.containsKey(user.getId())) {
             UserPlantData vo = new UserPlantData(
                 user.getId(),
-                user.getWaterTickets(),
-                user.getFertilizerTickets()
+                0, 0
             );
             
             dataMap.put(user.getId(), vo);

@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.function.Consumer;
 import ui.BaseScreen;
 import ui.UIManager;
+import ui.component.OptionPaneBuilder;
 
 public class BasketGameScreen extends BaseScreen implements BasketGameUI, ActionListener, KeyListener {
 
@@ -87,7 +88,7 @@ public class BasketGameScreen extends BaseScreen implements BasketGameUI, Action
 
         if (life <= 0) {
             timer.stop();
-            JOptionPane.showMessageDialog(this, "실패!");
+            JOptionPane.showMessageDialog(this, "실패!"); // 단순 메시지 표시는 빌더 클래스 사용하지 않음.
             finishGame(false);
         } 
         else if (score >= 5) {

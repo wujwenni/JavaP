@@ -161,7 +161,7 @@ public class PlantManagementScreen extends BaseScreen {
                 } else {
                     OptionPaneBuilder.create()
                         .title("NOTIFICATION")
-                        .message("물 티켓이 부족합니다")
+                        .message("물 티켓의 개수 또는 식물의 성장도를 확인해주세요")
                         .show();
                 }
             }).build());
@@ -201,7 +201,7 @@ public class PlantManagementScreen extends BaseScreen {
                 } else {
                     OptionPaneBuilder.create()
                         .title("NOTIFICATION")
-                        .message("비료 티켓이 부족합니다")
+                        .message("비료 티켓의 개수 또는 식물의 성장도를 확인해주세요")
                         .show();
                 }
             }).build());

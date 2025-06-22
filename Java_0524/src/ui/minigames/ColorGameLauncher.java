@@ -12,7 +12,7 @@ public class ColorGameLauncher {
         JFrame frame = new JFrame("색깔 기억 게임");
         ColorGameScreen screen = new ColorGameScreen(null, result -> {
         	uiManager.getRewardController().giveWaterTickets(result);
-        	System.out.println("게임 결과: " + result);
+        	//System.out.println("게임 결과: " + result);
             frame.dispose();
         });
 

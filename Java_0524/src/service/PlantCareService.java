@@ -25,7 +25,7 @@ public class PlantCareService {
         if (user == null) return null;
         UserPlantData data = plantDataManager.getCurrentUserData(user);
         if (data == null) {
-            data = new UserPlantData(user);
+            data = new UserPlantData(user.getId(), 0 , 0);
             plantDataManager.update(data);
         }
 
@@ -51,6 +51,9 @@ public class PlantCareService {
         }
         else {
         	// 물 티켓의 개수가 0 이상이고, 현재 로그인한 유저가 존재하고, 해당 유저의 식물이 존재할 때 실행문
+        	if (targetPlant.getGrowth() == 100) {
+        		return false;
+        	}
         	targetPlant.increaseGrowth(3 + (int)(Math.random() * 3));
             plantDTO.setGrowth(targetPlant.getGrowth());
             userManager.saveCurrentUser();
@@ -72,6 +75,9 @@ public class PlantCareService {
             return false;
         }
         else {
+        	if (targetPlant.getGrowth() == 100) {
+        		return false;
+        	}
         	targetPlant.increaseGrowth(3 + (int)(Math.random() * 3));
             plantDTO.setGrowth(targetPlant.getGrowth());
             userManager.saveCurrentUser();
@@ -91,11 +97,9 @@ public class PlantCareService {
         if (user == null || plantDTO == null) return false;
         if (targetPlant == null) return false;
         if (b) {
-    		targetPlant.increaseGrowth(3 + (int)(Math.random() * 3));
+    		targetPlant.increaseGrowth((int)(Math.random() * 3));
     		plantDTO.setGrowth(targetPlant.getGrowth());
             userManager.saveCurrentUser();
-            data.useFertilizerTicket(); // 채팅 시 비료티켓 1개 소모
-            plantDataManager.update(data);
     		return true;
     	}
         
