@@ -1,7 +1,6 @@
 package util;
+
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.net.URL;
 

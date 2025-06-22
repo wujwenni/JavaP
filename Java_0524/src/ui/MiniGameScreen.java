@@ -37,15 +37,17 @@ public class MiniGameScreen extends BaseScreen {
         JButton colorGameBtn = ButtonBuilder.create("색깔 기억 게임")
                 .fontSize(24)
                 .background(new Color(207, 233, 99))
+                .onClick(e -> runGameInThread(() -> ColorGameLauncher.launch(uiManager)))
                 .build();
 
         JButton basketGameBtn = ButtonBuilder.create("바구니 게임")
                 .fontSize(24)
                 .background(new Color(207, 233, 99))
+                .onClick(e -> runGameInThread(() -> BasketGameLauncher.launch(uiManager)))
                 .build();
 
-        colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch(uiManager)));
-        basketGameBtn.addActionListener(e -> runGameInThread(() -> BasketGameLauncher.launch(uiManager)));
+        //colorGameBtn.addActionListener(e -> runGameInThread(() -> ColorGameLauncher.launch(uiManager)));
+        //basketGameBtn.addActionListener(e -> runGameInThread(() -> BasketGameLauncher.launch(uiManager)));
 
         buttonPanel.add(colorGameBtn);
         buttonPanel.add(basketGameBtn);

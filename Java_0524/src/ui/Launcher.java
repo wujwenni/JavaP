@@ -9,7 +9,7 @@ import ui.component.OptionPaneBuilder;
 
 public class Launcher {
 
-    // 🌱 메인 애플리케이션 실행
+    //메인 실행
     public static void launch() {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = createMainFrame("Green Friend", 800, 900);
@@ -39,7 +39,7 @@ public class Launcher {
         });
     }
 
-    // 🎮 미니게임 선택 화면 실행
+    //미니게임 선택 화면 실행
     public static void launchMiniGameSelection(UIManager uiManager) {
         SwingUtilities.invokeLater(() -> {
             JFrame gameFrame = createSubFrame("미니게임 선택", 400, 300);
@@ -49,6 +49,8 @@ public class Launcher {
         });
     }
     
+    
+    // 화단 창 실행
     public static void launchGardenScreen(UIManager uiManager) {
     	SwingUtilities.invokeLater(() -> {
             JFrame gardenFrame = createSubFrame("화단", 1600, 900);
@@ -57,7 +59,7 @@ public class Launcher {
             gardenFrame.setVisible(true);
         });
     }
-    
+    // 채팅 창 실행
     public static void launchChatScreen(UIManager uiManager, Runnable onCloseCallback) {
         JFrame frame = new JFrame("Chat");
         ChattingScreen screen = new ChattingScreen(uiManager);
@@ -68,7 +70,7 @@ public class Launcher {
     }
 
 
-    // ✅ 메인 프레임 생성
+    //메인 프레임 생성
     private static JFrame createMainFrame(String title, int width, int height) {
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +80,7 @@ public class Launcher {
         return frame;
     }
 
-    // ✅ 서브 프레임 생성 (미니게임용)
+    //서브 프레임 생성 (미니게임용)
     private static JFrame createSubFrame(String title, int width, int height) {
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

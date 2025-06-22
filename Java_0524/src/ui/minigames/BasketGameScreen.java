@@ -44,7 +44,7 @@ public class BasketGameScreen extends BaseScreen implements BasketGameUI, Action
 
     @Override
     protected void initialize() {
-        // 필요시 레이아웃 설정 가능
+        // 필요 시 레이아웃 설정 가능
     }
 
     @Override
@@ -76,7 +76,8 @@ public class BasketGameScreen extends BaseScreen implements BasketGameUI, Action
                 if (obj.isGood) score++;
                 else life--;
                 iter.remove();
-            } else if (obj.y > 400) {
+            } 
+            else if (obj.y > 400) {
                 if (obj.isGood) life--;
                 iter.remove();
             }
@@ -88,7 +89,8 @@ public class BasketGameScreen extends BaseScreen implements BasketGameUI, Action
             timer.stop();
             JOptionPane.showMessageDialog(this, "실패!");
             finishGame(false);
-        } else if (score >= 5) {
+        } 
+        else if (score >= 5) {
             timer.stop();
             JOptionPane.showMessageDialog(this, "성공!");
             finishGame(true);
@@ -99,20 +101,40 @@ public class BasketGameScreen extends BaseScreen implements BasketGameUI, Action
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             userX = Math.max(0, userX - 20);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        } 
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             userX = Math.min(getWidth() - 60, userX + 20);
         }
         repaint();
     }
 
-    @Override public void keyReleased(KeyEvent e) {}
-    @Override public void keyTyped(KeyEvent e) {}
+    @Override 
+    public void keyReleased(KeyEvent e) {
+    	
+    }
+    @Override 
+    public void keyTyped(KeyEvent e) {
+    	
+    }
 
-    // BasketGameUI 구현부
-    @Override public void updateLife(int life) { this.life = life; }
-    @Override public void updateScore(int score) { this.score = score; }
-    @Override public void repaintGame() { repaint(); }
-    @Override public void finishGame(boolean success) {
+    // BasketGameUI 구현
+    @Override 
+    public void updateLife(int life) { 
+    	this.life = life; 
+    }
+    
+    @Override 
+    public void updateScore(int score) { 
+    	this.score = score; 
+    }
+    
+    @Override 
+    public void repaintGame() { 
+    	repaint(); 
+    }
+    
+    @Override 
+    public void finishGame(boolean success) {
         resultCallback.accept(success);
     }
 }

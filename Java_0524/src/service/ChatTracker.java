@@ -16,7 +16,7 @@ public class ChatTracker {
         for (String keyword : KEYWORDS) {
             if (input.contains(keyword)) {
                 matchCount++;
-                System.out.println("✅ 키워드 매칭: \"" + keyword + "\" (누적 " + matchCount + "회)");
+                //System.out.println("키워드 매칭: \"" + keyword + "\" (누적 " + matchCount + "회)");
 
                 if (matchCount >= 6 && matchCount <= 10) {
                 	growthReached = true;

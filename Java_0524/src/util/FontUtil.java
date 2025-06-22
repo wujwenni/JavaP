@@ -22,7 +22,7 @@ public class FontUtil {
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
             return font;
         } catch (Exception e) {
-            System.err.println("⚠️ 폰트 로딩 실패: " + path);
+            System.err.println("폰트 로딩 실패: " + path);
             return new Font("SansSerif", Font.PLAIN, (int) size); // fallback
         }
     }
