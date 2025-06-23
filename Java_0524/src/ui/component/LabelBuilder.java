@@ -30,17 +30,6 @@ public class LabelBuilder {
         return this;
     }
     
-    public LabelBuilder icon(String relativePath) {
-        URL resource = getClass().getClassLoader().getResource(relativePath);
-        if (resource != null) {
-            ImageIcon rawIcon = new ImageIcon(resource);
-            label.setIcon(rawIcon);
-        } else {
-            System.err.println("이미지 로딩 실패: " + relativePath);
-        }
-        return this;
-    }
-    
     public LabelBuilder bounds(int x, int y, int width, int height) {
         label.setBounds(x, y, width, height);
         return this;

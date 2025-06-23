@@ -60,7 +60,7 @@ public class InputFieldBuilder {
         return this;
     }
 
-    // 최종 필드 반환
+    // 반환
     public JTextField build() {
         return textField;
     }

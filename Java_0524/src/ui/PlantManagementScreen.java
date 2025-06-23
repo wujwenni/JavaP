@@ -23,11 +23,13 @@ public class PlantManagementScreen extends BaseScreen {
     private JPanel plantDisplayPanel;
     private PlantManagementController controller;
     
+    // 1:1 비율 이미지를 사용했고, 아래 상수 설정으로 최대한 이미지가 찌그러지지 않게 함.
+    // 또한 해당 상수 설정은 식물 성장 애니메이션 구현을 위해 설정함.
     private static final int PANEL_WIDTH  = 450;   // 식물 디스플레이 영역의 전체 너비
-    private static final int POT_TOP_Y    = 450;   // 화분 이미지 맨 위(Y) 좌표
+    private static final int POT_TOP_Y    = 450;   // 화분 이미지 맨 위 좌표
     private static final int POT_W        = 300;   // 화분 이미지 표시 너비
     private static final int POT_H        = 270;   // 화분 이미지 표시 높이
-    private static final int FULL_W      = 450;
+    private static final int FULL_W      = 450;    
     private static final int FULL_H      = 450;
     
     
@@ -48,7 +50,6 @@ public class PlantManagementScreen extends BaseScreen {
     	setLayout(new BorderLayout());
     	
         controller.setSelectedPlant(selectedPlant);
-        // 티켓 정보 라벨 생성
         int water = uiManager.getUserPlantDataController().getCurrentPlantInfo().getWaterTickets();
         int fert = uiManager.getUserPlantDataController().getCurrentPlantInfo().getFertilizerTickets();
         ticketLabel = LabelBuilder.create("Water Tickets: " + water + " / Fertilizer Tickets: " + fert)
@@ -80,27 +81,17 @@ public class PlantManagementScreen extends BaseScreen {
         	add(topPanel, BorderLayout.NORTH);
 
 
-        // 식물 이미지
-        	// 예시: initialize() 안에서
-
-        	// 1) panel 크기／null‐layout
         	plantDisplayPanel = PanelBuilder.create()
-                    .size(PANEL_WIDTH, 800)    // 높이는 임의로 800 지정
+                    .size(PANEL_WIDTH, 800)    // 높이는 임의로 800 지정 (프로그램 창 기본 크기: 800 by 900)
                     .opaque(false)
                     .nullLayout()
                     .build();
         	
-        	int stage = 
-        		      selectedPlant.getGrowth() <  25  ? 0
-        		    : selectedPlant.getGrowth() <  50 ? 1
-        		    : selectedPlant.getGrowth() <  75 ? 2
-        		    : selectedPlant.getGrowth() < 100 ? 3
-        		    : 4;
         	
         	int displayH = FULL_H;          
-        	int displayW = FULL_W ;    // 비율 유지
+        	int displayW = FULL_W ;    // 크기 및 비율 동일 유지
 
-        	// 위치 계산도 동일하게
+        	// 위치 계산도 동일
         	int x = (PANEL_WIDTH - displayW) / 2;
         	int y = POT_TOP_Y - displayH + 150;
 
@@ -122,32 +113,32 @@ public class PlantManagementScreen extends BaseScreen {
             plantDisplayPanel.add(plantLabel);
            
 
-        		// 2) 화분 이미지 (150×80), y=450
-        		JLabel potLabel = LabelBuilder.create("")   // 텍스트 없이 아이콘만
+        		// pot 이미지 : 150 by 80, y=450
+        		JLabel potLabel = LabelBuilder.create("")  // 텍스트 없는 라벨으로 이미지만 띄우기
                         .icon("pot.png", POT_W, POT_H)
-                        // x: (전체 너비 − 아이콘 너비)/2 → 중앙 정렬
+                        // x: (전체 너비 − 아이콘 너비)/2 , 중앙 정렬
                         // y: POT_TOP_Y 에 아이콘 맨 위를 맞춤
                         .bounds((PANEL_WIDTH - POT_W) / 2, POT_TOP_Y, POT_W, POT_H)
                         .build();
                 plantDisplayPanel.add(potLabel);
 
-        		// 3) 성장바 (400×20), y=700
+        		// 성장도 프로그레스바 : 400 by 20, y=700
         		plantDisplayPanel.add(progressBar);
         		progressBar.setBounds(20, 100 + 400 + 20 + 150 + 20, 400, 20);
 
-        		// 4) 화면에 붙이기
+        		// 컴포넌트 부착
         		JPanel centerWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         		centerWrapper.setOpaque(false);
         		centerWrapper.add(plantDisplayPanel);
         		add(centerWrapper, BorderLayout.CENTER);
 
 
-        // 하단 버튼
+        // 하단 버튼 부착할 패널
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 10, 10));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
         buttonPanel.setOpaque(false);
 
-        // 물 주기
+        // 물 주기 버튼
         buttonPanel.add(ButtonBuilder.create("물 주기")
             .fontSize(14f).bold(true).cooldown(3000)
             .background(new Color(173, 216, 230))
@@ -166,7 +157,7 @@ public class PlantManagementScreen extends BaseScreen {
                 }
             }).build());
 
-        // 대화하기
+        // 대화 창 버튼
         buttonPanel.add(ButtonBuilder.create("대화하기")
             .fontSize(14f).bold(true)
             .background(new Color(255, 250, 205))
@@ -187,7 +178,7 @@ public class PlantManagementScreen extends BaseScreen {
                 }
             })).build());
 
-        // 비료 주기
+        // 비료 주기 버튼
         buttonPanel.add(ButtonBuilder.create("비료 주기")
             .fontSize(14f).bold(true).cooldown(3000)
             .background(new Color(168, 119, 71))
@@ -206,7 +197,7 @@ public class PlantManagementScreen extends BaseScreen {
                 }
             }).build());
 
-        // 미니게임
+        // 미니게임 버튼
         buttonPanel.add(ButtonBuilder.create("미니게임")
             .fontSize(14f).bold(true)
             .background(new Color(221, 160, 221))
@@ -215,6 +206,7 @@ public class PlantManagementScreen extends BaseScreen {
         add(buttonPanel, BorderLayout.SOUTH);
 
         // 포커스 얻을 때 티켓 갱신
+        // 메인 프로그램 창에 focus가 갈 때, 티켓의 수를 나타내는 라벨을 계속 갱신함
         SwingUtilities.invokeLater(() -> {
             Window w = SwingUtilities.getWindowAncestor(this);
             if (w != null) {
@@ -235,18 +227,18 @@ public class PlantManagementScreen extends BaseScreen {
             .getCurrentPlantInfo().getFertilizerTickets();
         ticketLabel.setText(
             "Water Tickets: " + water + " / Fertilizer Tickets: " + fert
-        );
+        ); // setText로 라벨의 텍스트 수정.
     }
 
     private void updateGrowthBar(int newGrowth) {
         selectedPlant.setGrowth(newGrowth);
-        progressBar.setValue(newGrowth);
-        
+        progressBar.setValue(newGrowth);   
     }
     
     private void updatePlantImageWithAnimation(int oldGrowth, int newGrowth, String plantName, boolean a) {
-        // 1) growth → stage
         int oldStage, newStage;
+        // 성장도 값의 증가로 newStage의 값이 증가하면 애니메이션을 재생하기 위한 메서드
+        // 아래 식은 성장도를 식물의 단계로 바꾸어 주는 것
         if 		(newGrowth < 25)   newStage = 0;
         else if (newGrowth < 50)  newStage = 1;
         else if (newGrowth < 75)  newStage = 2;
@@ -261,14 +253,14 @@ public class PlantManagementScreen extends BaseScreen {
 
         if (a && newStage > oldStage) {
         	GrowEffect.updateAndPlay(
-                    plantLabel,        // 애니메이션 대상 JLabel
+                    plantLabel,        // 애니메이션 대상 라벨
                     PANEL_WIDTH,       // 패널 전체 너비
-                    POT_TOP_Y + 150,         // 화분 꼭대기 Y 좌표
-                    FULL_W,            // 만개 원본 너비
-                    FULL_H,            // 만개 원본 높이
-                    newStage,             // 계산된 스테이지
-                    plantName,         // "rose","tulip","sunflower"
-                    1000,               // 애니메이션 총 시간(ms)
+                    POT_TOP_Y + 150,   // 화분 꼭대기 Y 좌표
+                    FULL_W,            // 원본 너비
+                    FULL_H,            // 원본 높이
+                    newStage,          // 계산된 스테이지
+                    plantName,         // 장미, 튤립, 해바라기
+                    1000,              // 애니메이션 재생 시간 (밀리세컨드)
                     45                 // 프레임 수
                 );
         }

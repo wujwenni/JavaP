@@ -27,11 +27,6 @@ public class ButtonBuilder {
         return builder;
     }
 
-    public ButtonBuilder font(Font font) {
-        this.font = font;
-        return this;
-    }
-
     public ButtonBuilder fontSize(float size) {
         if (FontUtil.getDefaultFont() != null)
             this.font = FontUtil.getDefaultFont().deriveFont(size);
@@ -84,7 +79,7 @@ public class ButtonBuilder {
         JButton btn;
 
         if (cooldownEnabled) {
-            //쿨타임 + 시각 효과 포함된 버튼 생성
+            //쿨타임, 시각 효과 포함된 버튼 생성
             btn = new JButton(text) {
                 @Override
                 protected void paintComponent(Graphics g) {
@@ -122,7 +117,7 @@ public class ButtonBuilder {
             }
         }
 
-        // 공통 속성 적용
+        // 이외 속성 적용
         if (font != null) btn.setFont(font);
         if (background != null) btn.setBackground(background);
         if (foreground != null) btn.setForeground(foreground);

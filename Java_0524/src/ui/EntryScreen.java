@@ -22,9 +22,8 @@ public class EntryScreen extends BaseScreen {
 	        		.opaque(false)
 	        		.build();
 
-	        // Title
 	        JLabel title = LabelBuilder.create("")
-	        	    .icon("components/labels/titlelabel.png", 480, 330)  // 실제 경로와 크기에 맞게 조정
+	        	    .icon("components/labels/titlelabel.png", 480, 330)
 	        	    .alignCenter()
 	        	    .build();
 	        GridBagConstraints gbc = new GridBagConstraints();
@@ -45,9 +44,8 @@ public class EntryScreen extends BaseScreen {
 	                .foreground(Color.BLACK)
 	                .onClick(e -> uiManager.showScreen(new LoginScreen(uiManager)))
 	                .build();
-	        
-	        gbc.gridy = 1; // title 아래에 버튼 위치
-	        gbc.insets = new Insets(40, 0, 0, 0); // 버튼 위쪽 여백
+	        gbc.gridy = 1;
+	        gbc.insets = new Insets(40, 0, 0, 0);
 
 	        panel.add(startButton, gbc);
 

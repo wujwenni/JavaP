@@ -11,11 +11,11 @@ public class PanelBuilder {
         this.panel = panel;
     }
 
-    /** 기존 빈 JPanel 생성용 */
     public static PanelBuilder create() {
         return new PanelBuilder(new JPanel());
     }
     
+    // 특정 패널에 추가하기 위한 메서드
     public static PanelBuilder create(JPanel customPanel) {
         return new PanelBuilder(customPanel);
     }
@@ -117,7 +117,6 @@ public class PanelBuilder {
         );
         Image bg = icon.getImage();
 
-        //익명 서브클래스 패널 생성
         JPanel imgPanel = new JPanel(lm) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -128,13 +127,13 @@ public class PanelBuilder {
         imgPanel.setBorder(bd);
         imgPanel.setOpaque(opa);
 
-        //기존 자식 컴포넌트 옮기기
+        // 기존 컴포넌트 옮기기
         for (Component c : comps) {
             panel.remove(c);
             imgPanel.add(c);
         }
 
-        //레퍼런스 교체
+        // 레퍼런스 교체
         this.panel = imgPanel;
         return this;
     }

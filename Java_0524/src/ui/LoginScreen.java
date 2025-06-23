@@ -24,14 +24,12 @@ public class LoginScreen extends BaseScreen {
         		.opaque(false)
         		.build();
 
-        // Title
         JLabel title = LabelBuilder.create("")
-        	    .icon("components/labels/loginlabel.png", 300, 150)  // 실제 경로와 크기에 맞게 조정
+        	    .icon("components/labels/loginlabel.png", 300, 150)
         	    .alignCenter()
         	    .build();
         	panel.add(title, gbc(0, 0, 2, GridBagConstraints.NORTH));
 
-        // 아이디
         JLabel labelId = LabelBuilder.create("아이디")
         		.fontSize(22f)
         		.bold(true)
@@ -54,7 +52,6 @@ public class LoginScreen extends BaseScreen {
         panel.add(labelPw, gbc(0, 2, 1, GridBagConstraints.EAST));
         panel.add(tfPw, gbc(1, 2, 1, GridBagConstraints.WEST));
 
-        // 버튼
         JButton btnLogin = ButtonBuilder.create("로그인")
         		.fontSize(14f)
         		//.bold(true)

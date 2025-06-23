@@ -8,8 +8,8 @@ import controller.PlantManagementController;
 import ui.component.OptionPaneBuilder;
 
 public class Launcher {
-
-    //메인 실행
+	// 프로그램에서 창으로 실행되는 모든 요소들에 대한 클래스.
+    // 메인 실행
     public static void launch() {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = createMainFrame("Green Friend", 800, 900);
@@ -80,7 +80,7 @@ public class Launcher {
         return frame;
     }
 
-    //서브 프레임 생성 (미니게임용)
+    // 미니게임용 서브 프레임
     private static JFrame createSubFrame(String title, int width, int height) {
         JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

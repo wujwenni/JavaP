@@ -10,7 +10,6 @@ import javax.swing.*;
 public class UIManager {
 
     private final JFrame frame;
-
     private final UserController userController;
     private final UserPlantDatacontroller userPlantDataController;
     private final PlantManagementController plantManagementController;
@@ -36,19 +35,15 @@ public class UIManager {
     public UIManager(JFrame frame) {
         this.frame = frame;
 
-        // 1. Repository
         UserPlantDataRepository userPlantDataRepository = new UserPlantDataRepository();
 
-        // 2. Manager
         UserPlantDataManager userPlantDataManager = new UserPlantDataManager(userPlantDataRepository);
         UserManager userManager = new UserManager();
 
-        // 3. Services
         PlantCareService plantCareService = new PlantCareService(userManager, userPlantDataManager);
         PlantQueryService plantQueryService = new PlantQueryService(userManager, userPlantDataManager);
         RewardService rewardService = new RewardService(userManager, userPlantDataManager);
 
-        // 4. Controller
         this.userController = new UserController(userManager, userPlantDataManager);
         this.userPlantDataController = new UserPlantDatacontroller(
             plantCareService,

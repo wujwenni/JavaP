@@ -6,29 +6,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-/**
- * GrowEffect
- *
- * 아래→위로 자라는 애니메이션과 함께 스테이지별 이미지를 세팅해 주는 유틸리티 클래스입니다.
- */
 public class GrowEffect {
     
-    public static void updateAndPlay(JLabel label,
-                                     int panelW,
-                                     int potTopY,
-                                     int fullW,
-                                     int fullH,
-                                     int stage,
-                                     String plantName,
-                                     int durationMs,
-                                     int steps) {
-        // 1) stage0: 숨김 처리
+    public static void updateAndPlay(JLabel label, int panelW, int potTopY, int fullW, int fullH, int stage, 
+    		String plantName, int durationMs, int steps) {
+        
+    	//stage0: null image
         if (stage <= 0) {
             label.setIcon(null);
             return;
         }
 
-        // 2) 리소스 경로 결정
+        // 리소스 경로 결정
         String resourcePath;
         if (stage <= 3) {
             resourcePath = "plants/stage" + stage + ".png";
@@ -36,20 +25,19 @@ public class GrowEffect {
             resourcePath = "plants/" + plantName + "_stage4.png";
         }
 
-        // 3) 목표 크기 계산
+        // 크기 계산
         int targetH = fullH;
         int targetW = fullW;
         int x       = (panelW - targetW) / 2;
 
-        // 4) 아이콘 세팅 (미리 전체 크기로 로드)
         ImageIcon icon = resizeIcon(resourcePath, targetW, targetH);
         label.setIcon(icon);
 
-        // 5) 수직 정렬(BOTTOM) & 초기 bounds (높이 0)
+        // 수직 정렬, 초기 크기 설정
         label.setVerticalAlignment(SwingConstants.BOTTOM);
         label.setBounds(x, potTopY, targetW, 0);
 
-        // 6) 애니메이션 타이머 설정
+        // 애니메이션 타이머 설정
         int delay  = durationMs / steps;
         int deltaH = Math.max(1, targetH / steps);
 
@@ -67,14 +55,13 @@ public class GrowEffect {
                 }
             }
         });
-
         timer.start();
     }
 
     private static ImageIcon resizeIcon(String resourcePath, int w, int h) {
         URL url = GrowEffect.class.getClassLoader().getResource(resourcePath);
         if (url == null) {
-            System.err.println("GrowEffect: 리소스 로드 실패 → " + resourcePath);
+            //System.err.println("실패 : " + resourcePath);
             return null;
         }
         Image raw = new ImageIcon(url).getImage();

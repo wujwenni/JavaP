@@ -17,10 +17,10 @@ public abstract class BaseScreen extends JPanel {
     	URL resource = getClass().getClassLoader().getResource(relativePath);
         if (resource != null) {
         	System.out.println("success");
-            this.backgroundImage = new ImageIcon(resource).getImage();  // ← 원본 이미지만 저장
+            this.backgroundImage = new ImageIcon(resource).getImage();  // 원본 이미지만 저장
             repaint();
         } else {
-            System.err.println("배경 이미지 로딩 실패: " + relativePath);
+            //System.err.println("배경 이미지 로딩 실패: " + relativePath);
         }
     }
     

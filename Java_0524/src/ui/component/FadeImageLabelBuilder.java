@@ -23,7 +23,7 @@ public class FadeImageLabelBuilder {
             this.width = width;
             this.height = height;
         } else {
-            System.err.println("⚠️ 이미지 로딩 실패: " + path);
+            //System.err.println("이미지 로딩 실패: " + path);
         }
         return this;
     }

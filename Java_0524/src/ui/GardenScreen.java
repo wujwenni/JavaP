@@ -53,11 +53,11 @@ public class GardenScreen extends BaseScreen {
 
 	        JPanel cell = PanelBuilder.create()
 	            .flowLayout(FlowLayout.LEFT)
-	            .backgroundImage(bgPath)  // 여기서 동적으로 경로 지정
+	            .backgroundImage(bgPath)  // 여기서 경로 지정
 	            .opaque(false)
 	            .build();
 
-	        // (성장된 식물이 있으면 아이콘 추가하는 로직)
+	        // 성장된 식물이 있으면 아이콘 추가
 	        if (i < grownPlants.size()) {
 	            Plant plant = grownPlants.get(i);
 	            JLabel plantLabel = LabelBuilder.create("")
@@ -80,7 +80,7 @@ public class GardenScreen extends BaseScreen {
 	    scrollPane.getViewport().setOpaque(false);
 	    scrollPane.setBorder(null);
 
-	    add(scrollPane, BorderLayout.CENTER); // ✅ gardenPanel은 add하지 않음
+	    add(scrollPane, BorderLayout.CENTER);
 	}
 
 }

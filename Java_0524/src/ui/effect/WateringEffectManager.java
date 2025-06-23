@@ -15,7 +15,7 @@ public class WateringEffectManager {
         JPanel panel;
         float alpha = 0f;
         boolean fadingIn = true;
-        int holdTime = 500; // milliseconds
+        int holdTime = 500; // 밀리세컨드
         int elapsedHold = 0;
     }
 

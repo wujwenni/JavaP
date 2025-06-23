@@ -14,7 +14,7 @@ import java.awt.event.*;
 
 public class ChattingScreen extends BaseScreen {
 
-    private final ChatTracker tracker = new ChatTracker();
+    private final ChatTracker tracker = new ChatTracker(); // 채팅 트래커
     private Runnable onCloseCallback;
     private JTextArea chatArea;
     private JTextField inputField;
@@ -33,7 +33,6 @@ public class ChattingScreen extends BaseScreen {
     protected void initialize() {
         setLayout(new BorderLayout());
 
-        // 💬 상단 제목
         JLabel title = LabelBuilder.create("Chatting")
             .fontSize(17f)
             .bold(true)
@@ -41,7 +40,6 @@ public class ChattingScreen extends BaseScreen {
             .build();
         add(title, BorderLayout.NORTH);
 
-        // 💬 채팅 영역
         chatArea = new JTextArea();
         chatArea.setEditable(false);
         chatArea.setFont(FontUtil.getDefaultFont().deriveFont(20f));
@@ -49,7 +47,6 @@ public class ChattingScreen extends BaseScreen {
         JScrollPane scrollPane = new JScrollPane(chatArea);
         add(scrollPane, BorderLayout.CENTER);
 
-        // 💬 하단 입력창 + 버튼
         inputField = new JTextField();
         JButton sendButton = ButtonBuilder.create("전송")
             .fontSize(14f)
@@ -59,7 +56,7 @@ public class ChattingScreen extends BaseScreen {
             .onClick(e -> handleUserInput())
             .build();
 
-        inputField.addActionListener(e -> handleUserInput()); // 엔터 입력 지원
+        inputField.addActionListener(e -> handleUserInput());
 
         JPanel inputPanel = new JPanel(new BorderLayout(5, 0));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -71,14 +68,8 @@ public class ChattingScreen extends BaseScreen {
     private void handleUserInput() {
         String input = inputField.getText().trim();
         if (input.isEmpty()) return;
-
-        // 채팅창에 사용자 입력 추가
         chatArea.append("나: " + input + "\n");
-        
-        // 트래커로 처리
         tracker.processUserInput(input);
-
-
         inputField.setText("");
     }
     
@@ -90,7 +81,7 @@ public class ChattingScreen extends BaseScreen {
         SwingUtilities.getWindowAncestor(this).addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-            	
+            	// 종료 시 트래커 초기화 및 콜백 실행
                 OptionPaneBuilder.create()
                 .title("종료 확인")
                 .parent(frame)

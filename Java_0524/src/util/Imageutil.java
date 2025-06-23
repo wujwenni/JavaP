@@ -8,7 +8,7 @@ public class Imageutil {
 	public static ImageIcon loadIcon(String relativePath, int width, int height) {
         URL resource = Imageutil.class.getClassLoader().getResource(relativePath);
         if (resource == null) {
-            System.err.println("이미지 로딩 실패: " + relativePath);
+            //System.err.println("이미지 로딩 실패: " + relativePath);
             return null;
         }
         

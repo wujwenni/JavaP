@@ -18,17 +18,18 @@ public class OwnedPlantListModalScreen {
         UserPlantDataTransfer dto = controller.getCurrentPlantInfo();
 
         if (dto.getOwnedPlants().isEmpty()) {
+        	// 보유식물 없을 때 예외처리
             uiManager.showScreen(new PlantSelectionScreen(uiManager));
             return;
         }
 
         JPanel listPanel = PanelBuilder.create()
-                .boxLayout(BoxLayout.Y_AXIS)
-                .padding(10)
+                .boxLayout(BoxLayout.Y_AXIS) // 세로로 쌓는 박스레이아웃
+                .padding(10) // 컴포넌트 간 간격 설정
                 .background(Color.WHITE)
                 .build();
 
-        // 라디오 버튼 구성
+        // 정렬을 위한 라디오 버튼 구성
         JRadioButton ascRadio = new JRadioButton("성장도 낮은 순", true);
         JRadioButton descRadio = new JRadioButton("성장도 높은 순");
         ButtonGroup group = new ButtonGroup();
@@ -42,7 +43,7 @@ public class OwnedPlantListModalScreen {
         radioPanel.add(ascRadio);
         radioPanel.add(descRadio);
 
-        // 식물 버튼 렌더링 함수
+        // 식물 버튼 구성 함수
         Runnable renderButtons = () -> {
             listPanel.removeAll();
 
@@ -57,8 +58,8 @@ public class OwnedPlantListModalScreen {
                         .background(plant.getName().equals("장미") ? new Color(233, 60, 60) :
                                 plant.getName().equals("튤립") ? new Color(233, 161, 136) :
                                 plant.getName().equals("해바라기") ? new Color(255, 255, 153) :
-                                new Color(207, 233, 99))
-                        .size(250, 50)
+                                new Color(207, 233, 99)) // 이퀄스 사용해서 객체의 스트링 멤버와 버튼 색을 매칭.
+                        .size(250, 50) // 모달의 리스트에서 식물 선택 버튼 크기 고정시킴
                         .onClick(e -> {
                             owner.getGlassPane().setVisible(false);
                             uiManager.showScreen(new PlantManagementScreen(uiManager, plantDTO));
@@ -85,7 +86,6 @@ public class OwnedPlantListModalScreen {
         scroll.setBackground(Color.white);
         scroll.getVerticalScrollBar().setUnitIncrement(16);
 
-        // + 버튼
         JButton plusButton = ButtonBuilder.create("+")
                 .fontSize(14f)
                 .background(Color.WHITE)
@@ -97,7 +97,6 @@ public class OwnedPlantListModalScreen {
                 })
                 .build();
 
-        // 화단 버튼
         JButton gardenButton = ButtonBuilder.create("화단")
                 .background(Color.WHITE)
                 .fontSize(20f)
@@ -115,9 +114,9 @@ public class OwnedPlantListModalScreen {
         JPanel content = PanelBuilder.create()
                 .borderLayout()
                 .padding(10)
-                .add(radioPanel, BorderLayout.NORTH)    // 라디오 버튼 패널
-                .add(scroll, BorderLayout.CENTER)       // 식물 목록
-                .add(bottomPanel, BorderLayout.SOUTH)   // +, 화단 버튼
+                .add(radioPanel, BorderLayout.NORTH)    
+                .add(scroll, BorderLayout.CENTER)       
+                .add(bottomPanel, BorderLayout.SOUTH)
                 .build();
 
         ModalBuilder.create(owner)

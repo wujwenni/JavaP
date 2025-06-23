@@ -21,7 +21,7 @@ public class JoinScreen extends BaseScreen {
         		.gridBagLayout()
         		.opaque(false)
         		.build();
-        // 제목
+
         JLabel title = LabelBuilder.create("회원가입")
             .fontSize(20)
             .bold(true)
@@ -30,7 +30,6 @@ public class JoinScreen extends BaseScreen {
             .build();
         panel.add(title, gbc(0, 0, 2, GridBagConstraints.CENTER));
 
-        // 아이디
         JLabel labelId = LabelBuilder.create("아이디")
         		.fontSize(22)
         		.opaque(false)
@@ -42,19 +41,16 @@ public class JoinScreen extends BaseScreen {
         panel.add(labelId, gbc(0, 1, 1, GridBagConstraints.EAST));
         panel.add(tfId, gbc(1, 1, 1, GridBagConstraints.WEST));
 
-        // 비밀번호
         JLabel labelPw = LabelBuilder.create("비밀번호")
         		.fontSize(22)
         		.opaque(false)
         		.build();
         JPasswordField tfPw = (JPasswordField) InputFieldBuilder.password()
-            .fontSize(14)
             .size(200, 30)
             .build();
         panel.add(labelPw, gbc(0, 2, 1, GridBagConstraints.EAST));
         panel.add(tfPw, gbc(1, 2, 1, GridBagConstraints.WEST));
 
-        // 버튼
         JButton btnRegister = ButtonBuilder.create("가입하기")
         		.fontSize(14)
              	.bold(true)
@@ -95,7 +91,6 @@ public class JoinScreen extends BaseScreen {
         panel.add(btnRegister, gbc(1, 3, 1, GridBagConstraints.WEST));
 
         add(panel, BorderLayout.CENTER);
-        
     }
 
     private GridBagConstraints gbc(int x, int y, int width, int anchor) {
